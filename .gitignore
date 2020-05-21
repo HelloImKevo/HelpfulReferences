@@ -1,0 +1,9 @@
+# Compiled class file
+*.class
+
+# Mac-specific
+.DS_Store
+
+# Apache NetBeans IDE
+/nbproject/private/
+/src/target/
