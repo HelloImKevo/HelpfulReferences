@@ -3,6 +3,18 @@ A collection of helpful references ranging from git tips and tricks to shell scr
 
 # Git Commands: Standard Stuff
 ```
+# Get current branch / changes status
+git status
+git log
+git branch
+
+# Show remote URL / filepath
+git remote show origin
+git branch -a
+git config -l
+git branch --remote
+
+# Checkout and pull an origin branch
 git checkout develop && git pull
 
 # Synchronizing your Local Branch with a Source Branch
@@ -30,11 +42,27 @@ git push origin :branch-name
 # See how many lines of code you changed
 git diff --shortstat
 
+# Showing file Differences between Branches
+git diff --shortstat develop..master
+git diff --name-status develop..master
+
 # Remove all Deleted files
 git rm $(git ls-files --deleted)
 
 # Remove files marked as 'Deleted by them' during a nasty merge
 git rm $(git diff --name-only --diff-filter=U)
+
+# Special git remove stuff
+git rm -r directory_to_remove
+git rm '*.txt' (Remove all text files)
+git commit -m "Message describing commit"
+
+# Remove a GitIgnored File that is being Tracked
+git rm -r --cached .
+git add .
+
+# Restore the state of any file from a remote branch
+git checkout origin/master /Users/person/GitProjects/app/Android/Activity.java
 ```
 
 # Git Commands: The Stash
@@ -56,6 +84,29 @@ git stash drop stash@{12}
 git stash list
 git stash show -p
 git stash show -p stash@{2}
+
+# Roll back a local commit and put it in the stash, so it can
+# be applied to several branches.
+git reset --soft HEAD~1
+git add . && git stash save "Changes I want to use on multiple branches"
+```
+
+# Git Commands: Config
+```
+# Check what the current remote repository URL is
+git config --get remote.origin.url
+
+# Show your user email address for this specific repository
+git config --get user.email
+
+# Set your user email address for this specific repository
+git config user.email "JohnSmith@gmail.com"
+
+# List all git config settings
+git config --list
+
+# List only the global git config settings
+git config --global -l
 ```
 
 # Git Commands: Logging and Viewing History
@@ -168,4 +219,15 @@ See also: #456, #789
 # Git Workflow: Forking & Pull Requests
 
 # Git Workflow: Mirror Copies of Repositories
+```
+# Initializing new local Repo on Windows file system
+cd ~/OneDrive/GitRepos
+mkdir NewProject
+cd NewProject
+git init
+cd ~/GitProjects/
+
+# Note that this will automatically create the 'NewProject' Directory
+git clone C:/Users/John/OneDrive/GitRepos/NewProject/.git
+```
 
