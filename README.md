@@ -111,6 +111,9 @@ git config --global -l
 
 # Git Commands: Logging and Viewing History
 ```
+# Show commits by author before a specific date
+git log --oneline -10 --author kevo --before "Oct 30 2019"
+
 git log --oneline --graph --all --decorate --abbrev-commit
 git log --oneline --decorate
 git log develop --oneline --graph --decorate --abbrev-commit
@@ -139,6 +142,63 @@ git log --author="_Your_Name_Here_" --pretty=tformat: --numstat | awk '{ add += 
 
 # Rough estimate of contributions by all authors
 git log --shortstat --pretty="%cE" | sed 's/\(.*\)@.*/\1/' | grep -v "^$" | awk 'BEGIN { line=""; } !/^ / { if (line=="" || !match(line, $0)) {line = $0 "," line }} /^ / { print line " # " $0; line=""}' | sort | sed -E 's/# //;s/ files? changed,//;s/([0-9]+) ([0-9]+ deletion)/\1 0 insertions\(+\), \2/;s/\(\+\)$/\(\+\), 0 deletions\(-\)/;s/insertions?\(\+\), //;s/ deletions?\(-\)//' | awk 'BEGIN {name=""; files=0; insertions=0; deletions=0;} {if ($1 != name && name != "") { print name ": " files " files changed, " insertions " insertions(+), " deletions " deletions(-), " insertions-deletions " net"; files=0; insertions=0; deletions=0; name=$1; } name=$1; files+=$2; insertions+=$3; deletions+=$4} END {print name ": " files " files changed, " insertions " insertions(+), " deletions " deletions(-), " insertions-deletions " net";}'
+```
+
+# Git Commands: Live Dangerously
+```
+############################################
+#                                          #
+#  Merging / Rewriting Git Branch History  #
+#                                          #
+############################################
+git checkout master
+
+# Use this when you know that all contents from source branch should be accepted.
+git merge -X theirs develop
+
+# Checks any remaining differences from the branch, into the current branch.
+git checkout develop .
+
+# If the previous step introduced more changes, usually they should be amended
+# to the "merge" commit (this keeps the history cleaner).
+git commit --amend
+
+# Compares the branches; if there are differences, something went wrong.
+# The contents of the branches should be identical when merging down. 
+git difftool develop
+
+############################################
+#                                          #
+#  Force Push to Fix Broken Remote Branch  #
+#                                          #
+############################################
+# Force Push to Fix a Broken or Diverged Remote Branch
+git checkout develop
+
+# Push your local branch to another local branch
+git push --force . develop:stage
+git checkout stage
+
+# Confirm that the branches are identical;
+# it is likely that the branch is diverged from origin.
+git diff --shortstat develop..stage
+
+# This command requires repo "Dangerous Change Protection" to be disabled.
+git push --force origin stage
+
+############################################
+#                                          #
+#       Permanently Erasing History        #
+#                                          #
+############################################
+git checkout develop
+git reset --hard 3cd5022c
+
+# Deletes the remote branch entirely
+git push origin :develop
+
+# Pushes all commits in the life of the branch to the remote repo
+git push origin develop
 ```
 
 # Maintaining a Clean Git History
