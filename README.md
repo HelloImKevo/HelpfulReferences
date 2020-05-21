@@ -1,9 +1,93 @@
 # Helpful References
 A collection of helpful references ranging from git tips and tricks to shell scripting examples.
 
-# Git Commands
+# Git Commands: Standard Stuff
 ```
 git checkout develop && git pull
+
+# Synchronizing your Local Branch with a Source Branch
+git checkout develop-my-feature && git rebase develop
+
+# Rebasing Dependent Branches using rebase onto
+# retrieve your old branch after committing... (noted in arcanist land output)
+# ex: git checkout -b dev-old-branch 622b869755986e198dfaac5534b6e7a7394f65a0
+git checkout my-feature-branch
+git rebase --onto dev-old-branch develop
+
+# Create a New Branch, based off Current Branch
+git checkout -b <name-of-new-branch>
+
+# Modifying your Local Branch
+git add <projectdir/src/com/ui/SomeCoolActivity.java>
+git commit -a -m "Custom Title Message"
+
+# Create new remote branch
+git push -u origin feature-branch-name
+
+# Delete a remote branch
+git push origin :branch-name
+
+# See how many lines of code you changed
+git diff --shortstat
+
+# Remove all Deleted files
+git rm $(git ls-files --deleted)
+
+# Remove files marked as 'Deleted by them' during a nasty merge
+git rm $(git diff --name-only --diff-filter=U)
+```
+
+# Git Commands: The Stash
+```
+# Stash your local changes
+git add .
+git stash
+git stash save "temporarily add new bluetooth SDK v0.9.8"
+git stash apply stash^{/temporarily add}
+git stash apply stash@{0}
+
+# Apply stashed changes & remove the stash
+git stash pop stash@{5}
+
+# Delete a stash
+git stash drop stash@{12}
+
+# Preview your stashed changes
+git stash list
+git stash show -p
+git stash show -p stash@{2}
+```
+
+# Git Commands: Logging and Viewing History
+```
+git log --oneline --graph --all --decorate --abbrev-commit
+git log --oneline --decorate
+git log develop --oneline --graph --decorate --abbrev-commit
+git log feature-x --oneline --graph --decorate --abbrev-commit
+git log release-pro-6.22.0 --oneline --graph --decorate --abbrev-commit
+git log develop --pretty=format:'%C(yellow)%h;%Cred%ad;%Cblue%an;%Creset%s' --date=short | column -ts ';' | less -r
+git log develop --author="Smith" --pretty=format:'%C(yellow)%h;%Cred%ad;%Cblue%an;%Creset%s' --date=short | column -ts ';' | less -r
+git log new-feature --author="John" --pretty=format:'%C(yellow)%h;%Cred%ad;%Cblue%an;%Creset%s' --date=short | column -ts ';' | less -r
+
+git log qa --oneline --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an : %Creset%s' --date=short f1cefdf9205f 3a8406a31b2c
+git log --oneline --merges --all --decorate
+git log qa --merges --pretty=format:'%C(yellow)%h;%Cred%ad;%Cblue%an;%Creset%s' --date=short | column -ts ';' | less -r
+git log qa --oneline --graph --all --decorate --abbrev-commit --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an : %Creset%s' --date=short
+
+####################################################################
+# Formats the git log output to include the commit hash, the date,
+# author, and title, with the "Bash Less" navigation mechanism 
+# (press 'q' to quit).
+#
+# See also: https://git-scm.com/docs/pretty-formats
+####################################################################
+git log master --pretty=format:'%C(yellow)%h=%Cred%ad=%Cblue%an=%Creset%s' --date=short | column -ts '=' | less -r
+
+# Total changes for specific author
+git log --author="_Your_Name_Here_" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -
+
+# Rough estimate of contributions by all authors
+git log --shortstat --pretty="%cE" | sed 's/\(.*\)@.*/\1/' | grep -v "^$" | awk 'BEGIN { line=""; } !/^ / { if (line=="" || !match(line, $0)) {line = $0 "," line }} /^ / { print line " # " $0; line=""}' | sort | sed -E 's/# //;s/ files? changed,//;s/([0-9]+) ([0-9]+ deletion)/\1 0 insertions\(+\), \2/;s/\(\+\)$/\(\+\), 0 deletions\(-\)/;s/insertions?\(\+\), //;s/ deletions?\(-\)//' | awk 'BEGIN {name=""; files=0; insertions=0; deletions=0;} {if ($1 != name && name != "") { print name ": " files " files changed, " insertions " insertions(+), " deletions " deletions(-), " insertions-deletions " net"; files=0; insertions=0; deletions=0; name=$1; } name=$1; files+=$2; insertions+=$3; deletions+=$4} END {print name ": " files " files changed, " insertions " insertions(+), " deletions " deletions(-), " insertions-deletions " net";}'
 ```
 
 # Maintaining a Clean Git History
