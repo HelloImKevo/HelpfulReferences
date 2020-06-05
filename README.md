@@ -113,6 +113,12 @@ git config --list
 git config --global -l
 ```
 
+# Git Commands: Cool Tricks
+```
+# Count how many commits in a range
+git rev-list newer_hash ^older_hash --count
+```
+
 # Git Commands: Logging and Viewing History
 ```
 # Show commits by author before a specific date
