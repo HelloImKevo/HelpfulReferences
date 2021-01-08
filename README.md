@@ -14,6 +14,10 @@ git branch -a
 git config -l
 git branch --remote
 
+# Show all local branches with very verbose output, which includes
+# the associated remote origin branch, and whether it still exists.
+git branch -vv
+
 # Checkout and pull an origin branch
 git checkout develop && git pull
 
