@@ -42,6 +42,7 @@ git checkout -b feature-branch-name
 git push -u origin feature-branch-name
 
 # Delete a remote branch
+git push origin --delete pr-merged-feature
 git push origin :pr-merged-feature
 
 # See how many lines of code you changed
