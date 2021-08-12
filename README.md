@@ -72,6 +72,9 @@ git add .
 
 # Restore the state of any file from a remote branch
 git checkout origin/master /Users/person/GitProjects/app/Android/Activity.java
+
+# Search history for a specific keyword
+git log --all --grep='keyword'
 ```
 
 # Git Commands: The Stash
