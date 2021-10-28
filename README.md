@@ -332,3 +332,9 @@ cd ~/GitProjects/
 # Note that this will automatically create the 'NewProject' Directory
 git clone C:/Users/John/OneDrive/GitRepos/NewProject/.git
 ```
+
+# Linux / Unix Utilities
+```
+# Show the differences between two files. Pipes indicate the lines are different.
+diff -y -W 180 foo1.json foo2.json | less
+```
