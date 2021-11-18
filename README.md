@@ -1,7 +1,25 @@
 # Helpful References
 A collection of helpful references ranging from git tips and tricks to shell scripting examples.
 
-# Git Commands: Standard Stuff
+# Git Command References
+## Git: CRUD (Create, Read, Update, Delete)
+```
+# Create a New Branch, based off Current Branch
+git checkout -b <name-of-new-branch>
+
+# Create new remote branch
+git checkout -b feature-branch-name
+git push -u origin feature-branch-name
+
+# Delete a remote branch
+git push origin --delete pr-merged-feature
+git push origin :pr-merged-feature
+
+# Fetch remote branches and prune deleted remote branches
+git fetch origin --prune
+```
+
+## Git: Standard Stuff
 ```
 # Get current branch / changes status
 git status
@@ -30,20 +48,9 @@ git checkout develop-my-feature && git rebase develop
 git checkout my-feature-branch
 git rebase --onto dev-old-branch develop
 
-# Create a New Branch, based off Current Branch
-git checkout -b <name-of-new-branch>
-
 # Modifying your Local Branch
 git add <projectdir/src/com/ui/SomeCoolActivity.java>
 git commit -a -m "Custom Title Message"
-
-# Create new remote branch
-git checkout -b feature-branch-name
-git push -u origin feature-branch-name
-
-# Delete a remote branch
-git push origin --delete pr-merged-feature
-git push origin :pr-merged-feature
 
 # See how many lines of code you changed
 git diff --shortstat
@@ -77,7 +84,7 @@ git checkout origin/master /Users/person/GitProjects/app/Android/Activity.java
 git log --all --grep='keyword'
 ```
 
-# Git Commands: The Stash
+## Git: The Stash
 ```
 # Stash your local changes
 git add .
@@ -103,7 +110,7 @@ git reset --soft HEAD~1
 git add . && git stash save "Changes I want to use on multiple branches"
 ```
 
-# Git Commands: Config
+## Git: Config
 ```
 # Check what the current remote repository URL is
 git config --get remote.origin.url
@@ -121,13 +128,13 @@ git config --list
 git config --global -l
 ```
 
-# Git Commands: Cool Tricks
+## Git: Cool Tricks
 ```
 # Count how many commits in a range
 git rev-list newer_hash ^older_hash --count
 ```
 
-# Git Commands: Logging and Viewing History
+## Git: Logging and Viewing History
 ```
 # Show commits by author before a specific date
 git log --oneline -10 --author kevo --before "Oct 30 2019"
@@ -162,7 +169,7 @@ git log --author="_Your_Name_Here_" --pretty=tformat: --numstat | awk '{ add += 
 git log --shortstat --pretty="%cE" | sed 's/\(.*\)@.*/\1/' | grep -v "^$" | awk 'BEGIN { line=""; } !/^ / { if (line=="" || !match(line, $0)) {line = $0 "," line }} /^ / { print line " # " $0; line=""}' | sort | sed -E 's/# //;s/ files? changed,//;s/([0-9]+) ([0-9]+ deletion)/\1 0 insertions\(+\), \2/;s/\(\+\)$/\(\+\), 0 deletions\(-\)/;s/insertions?\(\+\), //;s/ deletions?\(-\)//' | awk 'BEGIN {name=""; files=0; insertions=0; deletions=0;} {if ($1 != name && name != "") { print name ": " files " files changed, " insertions " insertions(+), " deletions " deletions(-), " insertions-deletions " net"; files=0; insertions=0; deletions=0; name=$1; } name=$1; files+=$2; insertions+=$3; deletions+=$4} END {print name ": " files " files changed, " insertions " insertions(+), " deletions " deletions(-), " insertions-deletions " net";}'
 ```
 
-# Git Commands: Live Dangerously
+## Git: Live Dangerously
 ```
 ############################################
 #                                          #
