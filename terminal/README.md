@@ -5,3 +5,8 @@ Some helpful tricks for Mac / Unix terminal env.
 ```commandline
 system_profiler SPUSBDataType
 ```
+
+## Install Rosetta 2 for Mac M1 Silicon Chips
+```commandline
+softwareupdate --install-rosetta
+```
