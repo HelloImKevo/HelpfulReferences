@@ -345,3 +345,80 @@ git clone C:/Users/John/OneDrive/GitRepos/NewProject/.git
 # Show the differences between two files. Pipes indicate the lines are different.
 diff -y -W 180 foo1.json foo2.json | less
 ```
+
+# Android
+
+## JADX
+jadx - Dex to Java decompiler: Command line and GUI tools for producing Java 
+source code from Android Dex and Apk files:  
+https://github.com/skylot/jadx  
+
+```shell
+jadx-gui /Users/johnny/Documents/DecompilerSandbox/AndroidApp_4.1.0.apk
+```
+
+## Apktool
+Reverse-engineering with Apktool:  
+https://apktool.org/  
+https://github.com/iBotPeaches/Apktool  
+
+```shell
+java -jar apktool_2.9.2.jar decode AndroidApp_4.1.0.apk
+
+java -jar apktool_2.9.2.jar build AndroidApp_4.1.0.apk
+```
+
+It is a tool for reverse engineering 3rd party, closed, binary Android apps. 
+It can decode resources to nearly original form and rebuild them after making 
+some modifications; it makes possible to debug **smali** code step by step.
+
+## ProGuard
+You can use `retrace.sh` from the Android SDK tools to use a mapping file
+to de-obfuscate a stack trace; example:
+```shell
+$ANDROID_SDK/tools/proguard/bin/
+
+retrace.sh mapping.txt stacktrace.txt
+```
+
+## Bugreport
+A bug report contains device logs, stack traces, and other diagnostic 
+information to help you find and fix bugs in your app. To capture a bug report 
+from your device, use the Take bug report developer option on the device, the 
+Android Emulator menu, or the adb bugreport command on your development machine.  
+https://developer.android.com/studio/debug/bug-report
+```shell
+# MacOS
+adb bugreport ~/Desktop/galaxy-bugreport.zip
+
+# Windows
+adb bugreport C:\Users\johnny\Desktop\galaxy-bugreport.zip
+```
+
+## Scrcpy
+Using the `-m` option usually fixes the "green bars" (screen burn-in) during
+recording on some devices:
+```shell
+scrcpy -m 1280 --record ~/Desktop/my-recording.mp4
+```
+
+### How to Grab a Screenshot from the Secondary Display
+You can get the "Display ID" using:
+```shell
+adb shell dumpsys display
+```
+And then look for a display labeled like "HDMI Screen". The Display ID is the
+numeric value of the `uniqueId` property in most cases:
+```
+DisplayDeviceInfo{"HDMI Screen": uniqueId="local:1", 1280 x 800, modeId 2, 
+defaultModeId 2, supportedModes [{id=2, width=1280, height=800, fps=60.000004}], 
+colorMode 0, supportedColorModes [0], HdrCapabilities android.view.Display$HdrCapabilities@40f16308, 
+density 237, 237.0 x 237.0 dpi, appVsyncOff 1000000, presDeadline 16666666, 
+touch EXTERNAL, rotation 0, type HDMI, address {port=1}, state ON, 
+FLAG_SECURE, FLAG_SUPPORTS_PROTECTED_BUFFERS, FLAG_PRESENTATION}
+```
+
+Then you use the `-d` option in `adb shell screencap`:
+```shell
+adb shell screencap -d 1 /sdcard/screen-01.png && adb pull /sdcard/screen-01.png ~/Desktop/
+```
