@@ -30,6 +30,18 @@ ifconfig wlan0 up
 iwconfig
 ```
 
+## Installing Atheros / Realtek drivers
+
+Applicable for Wi-Fi adapters with chipsets:
+* Atheros AR9271
+* Realtek RTL8812AU
+
+```commandline
+apt-get install -y realtek-rtl88xxau-dkms
+
+apt install realtek-rtl88xxau-dkms
+```
+
 # Mac References
 
 Some helpful tricks for Mac / Unix terminal env.
