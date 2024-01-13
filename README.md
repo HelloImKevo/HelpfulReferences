@@ -2,6 +2,11 @@
 A collection of helpful references ranging from git tips and tricks to shell scripting examples.
 
 # Git Command References
+
+## Git Resources
+An excellent, free, open-source difftool: **GitHub Desktop**  
+https://github.com/desktop/desktop
+
 ## Git: CRUD (Create, Read, Update, Delete)
 ```
 # Create a New Branch, based off Current Branch
