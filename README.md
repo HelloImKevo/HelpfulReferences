@@ -407,6 +407,11 @@ recording on some devices:
 scrcpy -m 1280 --record ~/Desktop/my-recording.mp4
 ```
 
+To show Screen Taps during a demo recording, use the `--show-touches` arg:
+```shell
+scrcpy -m 1024 --show-touches --record ~/Desktop/my-recording-with-taps.mp4
+```
+
 ### How to Grab a Screenshot from the Secondary Display
 You can get the "Display ID" using:
 ```shell
