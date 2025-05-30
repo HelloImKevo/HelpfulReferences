@@ -89,6 +89,15 @@ git checkout origin/master /Users/person/GitProjects/app/Android/Activity.java
 git log --all --grep='keyword'
 ```
 
+
+## Git: Re-Sync Local Branch with Existing Remote Branch
+```
+# Useful when you need to delete your local branch, create a new local
+# branch, and then point it to an existing remote branch.
+git branch --set-upstream-to=origin/task/kevo/JIRA-123-Integrate-KMP-MTM-Client-Into-Core
+```
+
+
 ## Git: The Stash
 ```
 # Stash your local changes
@@ -138,6 +147,14 @@ git config --global -l
 # Count how many commits in a range
 git rev-list newer_hash ^older_hash --count
 ```
+
+
+## Git: Diff, Show & Log Tricks
+```
+# Show the list of files that were changed with the most recent commit in `HEAD`
+git show --name-only --oneline HEAD
+```
+
 
 ## Git: Logging and Viewing History
 ```
