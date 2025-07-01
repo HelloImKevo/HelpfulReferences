@@ -84,14 +84,25 @@ git add .
 
 # Restore the state of any file from a remote branch
 git checkout origin/master /Users/person/GitProjects/app/Android/Activity.java
+```
 
-# Search history for a specific keyword
+
+## Searching for Content with Git and macOS
+```bash
+# Search git history for a specific keyword
 git log --all --grep='keyword'
+
+# Case insensitive search thru git history
+# returns 'Sugar', 'sugar', 'SUGAR', etc
+git log --grep="Sugar" -i
+
+# Search files within a macOS folder for a specific keyword
+fgrep -r "\"Error\":" ~/Downloads/LogFiles/
 ```
 
 
 ## Git: Re-Sync Local Branch with Existing Remote Branch
-```
+```bash
 # Useful when you need to delete your local branch, create a new local
 # branch, and then point it to an existing remote branch.
 git branch --set-upstream-to=origin/task/kevo/JIRA-123-Integrate-KMP-MTM-Client-Into-Core
