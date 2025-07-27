@@ -8,7 +8,7 @@ An excellent, free, open-source difftool: **GitHub Desktop**
 https://github.com/desktop/desktop
 
 ## Git: CRUD (Create, Read, Update, Delete)
-```
+```bash
 # Create a New Branch, based off Current Branch
 git checkout -b <name-of-new-branch>
 
@@ -25,7 +25,7 @@ git fetch origin --prune
 ```
 
 ## Git: Standard Stuff
-```
+```bash
 # Get current branch / changes status
 git status
 git log
@@ -110,7 +110,7 @@ git branch --set-upstream-to=origin/task/kevo/JIRA-123-Integrate-KMP-MTM-Client-
 
 
 ## Git: The Stash
-```
+```bash
 # Stash your local changes
 git add .
 git stash
@@ -136,7 +136,7 @@ git add . && git stash save "Changes I want to use on multiple branches"
 ```
 
 ## Git: Config
-```
+```bash
 # Check what the current remote repository URL is
 git config --get remote.origin.url
 
@@ -154,21 +154,21 @@ git config --global -l
 ```
 
 ## Git: Cool Tricks
-```
+```bash
 # Count how many commits in a range
 git rev-list newer_hash ^older_hash --count
 ```
 
 
 ## Git: Diff, Show & Log Tricks
-```
+```bash
 # Show the list of files that were changed with the most recent commit in `HEAD`
 git show --name-only --oneline HEAD
 ```
 
 
 ## Git: Logging and Viewing History
-```
+```bash
 # Show commits by author before a specific date
 git log --oneline -10 --author kevo --before "Oct 30 2019"
 
@@ -203,7 +203,7 @@ git log --shortstat --pretty="%cE" | sed 's/\(.*\)@.*/\1/' | grep -v "^$" | awk 
 ```
 
 ## Git: Live Dangerously
-```
+```bash
 ############################################
 #                                          #
 #  Merging / Rewriting Git Branch History  #
@@ -264,7 +264,7 @@ Over the course of my career, I constantly refer to this 2014 writeup by Chris B
 
 ## Introduction: Why good commit messages matter
 If you browse the log of any random Git repository, you will probably find its commit messages are more or less a mess. For example, take a look at these gems from my early days committing to Spring:
-```
+```bash
 $ git log --oneline -5 --author cbeams --before "Fri Mar 26 2009"
 
 e5f4b49 Re-adding ConfigurationPostProcessorTests after its brief removal in r814. @Ignore-ing the testCglibClassesAreLoadedJustInTimeForEnhancement() method as it turns out this was one of the culprits in the recent build breakage. The classloader hacking causes subtle downstream effects, breaking unrelated tests. The test method is still useful, but should only be run on a manual basis to ensure CGLIB is not prematurely classloaded, and should not be run as part of the automated build.
@@ -275,7 +275,7 @@ e5f4b49 Re-adding ConfigurationPostProcessorTests after its brief removal in r81
 ```
 
 Yikes. Compare that with these more recent commits from the same repository:
-```
+```bash
 $ git log --oneline -5 --author pwebb --before "Sat Aug 30 2014"
 
 5ba3db6 Fix failing CompositePropertySourceTests
@@ -341,7 +341,7 @@ See also: #456, #789
 * Useful link about project forks: https://gist.github.com/Chaser324/ce0505fbed06b947d962  
 * Great YouTube video tutorial "Creating a Simple Github Pull Request" by Jake Vanderplas: https://www.youtube.com/watch?v=rgbCcBNZcdQ  
 
-```
+```bash
 # Show which Git branches are tracking remote and upstream (source repo forked from)
 git branch -vv
 
@@ -361,7 +361,7 @@ git fetch git@github.com:username/ForkedProject.git refs/pull/50/head:pr-forked-
 ```
 
 # Git Workflow: Mirror Copies of Repositories
-```
+```bash
 # Initializing new local Repo on Windows file system
 cd ~/OneDrive/GitRepos
 mkdir NewProject
@@ -374,7 +374,7 @@ git clone C:/Users/John/OneDrive/GitRepos/NewProject/.git
 ```
 
 # Linux / Unix Utilities
-```
+```bash
 # Show the differences between two files. Pipes indicate the lines are different.
 diff -y -W 180 foo1.json foo2.json | less
 ```
@@ -459,4 +459,21 @@ FLAG_SECURE, FLAG_SUPPORTS_PROTECTED_BUFFERS, FLAG_PRESENTATION}
 Then you use the `-d` option in `adb shell screencap`:
 ```shell
 adb shell screencap -d 1 /sdcard/screen-01.png && adb pull /sdcard/screen-01.png ~/Desktop/
+```
+
+
+# macOS Development
+
+## Installing NPM (Node Package Manager)
+```bash
+arch -arm64 brew install npm
+```
+
+For more details about NPM, see:  
+https://github.com/HelloImKevo/UdemyDatingApp?tab=readme-ov-file#angular-cli-initial-setup
+
+## Installing OpenUPM (Unity Package Manager)
+```bash
+# Install openupm-cli
+npm install -g openupm-cli
 ```
