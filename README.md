@@ -477,3 +477,35 @@ https://github.com/HelloImKevo/UdemyDatingApp?tab=readme-ov-file#angular-cli-ini
 # Install openupm-cli
 npm install -g openupm-cli
 ```
+
+
+## Convert Markdown to PDF
+
+```bash
+# Using Pandoc (most powerful)
+pandoc README.md -o README.pdf
+
+# With better styling
+pandoc README.md -o README.pdf --pdf-engine=wkhtmltopdf --css=style.css
+
+# Using md-to-pdf (Node.js)
+npm install -g md-to-pdf
+md-to-pdf README.md
+```
+
+### Online Converters
+
+- Markdown to PDF (https://md-to-pdf.fly.dev/)
+  - Simply paste your markdown content
+  - Instant conversion with good formatting
+
+- Dillinger (https://dillinger.io/)
+  - Live markdown editor with PDF export
+  - Preserves formatting well
+
+
+### IDE/Editor Extensions
+
+- VS Code: Markdown PDF extension
+- Typora: Built-in PDF export
+- Mark Text: Export to PDF option
