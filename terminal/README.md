@@ -57,3 +57,21 @@ system_profiler SPUSBDataType
 ```commandline
 softwareupdate --install-rosetta
 ```
+
+## How to check if your Terminal is in Arm64 mode
+1. Open the Terminal app.
+2. Type the following command and press Enter:
+```bash
+uname -m
+```
+3. The output will tell you the current architecture:
+  - arm64: The terminal is running natively on Apple Silicon.
+  - x86_64: The terminal is running in Intel-emulation mode via Rosetta 2. 
+
+## For a separate, dedicated x86 terminal
+A more permanent solution is to create a duplicate Terminal app that is always configured to use Rosetta 2. 
+
+1. Navigate to your Applications/Utilities folder in Finder.
+2. Right-click the Terminal app and select Duplicate.
+3. Rename the copy to something like "Rosetta Terminal."
+4. Right-click the new app and select Get Info.
