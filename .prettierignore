@@ -1,0 +1,16 @@
+# Ignore specific markdown files if needed
+# Example: README.md
+*.md
+
+# Ignore image files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Ignore other files that don't need formatting
+*.min.js
+*.min.css
+node_modules/
+.git/
